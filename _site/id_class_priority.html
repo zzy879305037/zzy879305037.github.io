@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Page: Don't Panic</title>
+    <meta charset="utf-8">
+	<style>
+		li a {
+			/* style all <a>(超链接)-><li> directly under body */
+			
+		
+			color: red;
+		}
+		#exec-bio {
+			/* #id to apple style to blok with specific id */
+			/* #id > .class (e.g. if conflicts, #id has priority) */
+		
+			background-color: lightgray;
+		}
+		#exec-bio.cio-background {
+			/* #id.class > #id (it will override #id if conflicts) */
+			
+		
+		  background: red;
+		}
+		.bio-box {
+			/* .class to apply style to block with specific class */
+			
+		
+			border: 1px solid black;
+		}
+		.cio-background {
+			background-color: azure;
+		}
+		.bio-box a {
+		    color: green;
+		}
+		
+		.bio-box {
+		    width: 75%;
+		}
+		.bio-box {
+		  	/* conflicts to above one, since it comes later, it gets applied */
+		  	
+		  
+		    width: 50%;
+		}
+	</style>
+  </head>
+  <body>
+    <h1>I'm an h1</h1>
+    <ul>
+      <li>
+        <a href="http://example.com/">Link</a>
+      </li>
+      <li>
+        <a href="http://example.com/">Link</a>
+      </li>
+      <li>
+        <a href="http://example.com/">Link</a>
+      </li>
+    </ul>
+    <h2>I'm an h2</h2>
+    <div id="exec-bio" class="bio-box cio-background">
+		<!-- id must be unique(through all the file), but able to have multiple classes like class="c1 c2 c3 ..." -->
+      <a href="http://example.com/">I'm a link</a>
+    </div>
+    <div class="bio-box cio-background">
+      <a href="http://example.com/">I'm a link</a>
+    </div>
+    <div class="bio-box cio-background">
+      <a href="http://example.com/">I'm a link</a>
+    </div>
+    <div class="bio-box cio-background">
+      <a href="http://example.com/">I'm a link</a>
+    </div>
+  </body>
+</html>

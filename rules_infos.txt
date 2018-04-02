@@ -1,0 +1,128 @@
+Three selector limit rule-
+keep the number of selectors in a declaration under three (i.e., to three or fewer) since it slows the redendering time.
+
+CHAPTER3 --- CSS color and sizing
+
+CSS colors:
+https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
+
+background: rgba(150, 150, 150, 0.5);	//last value stands for 										  transparent level
+
+
+Percentage sizing for block-elements:
+	For width, if parent doesn't set width, it defaults as browser's width. 
+	Unlike width, when you specify a height in percent, the parent container has to have some sort of defined height set in order for the child percent height to be applied.
+
+
+Percentage sizing for text-size —— em:
+	For plain text (that is, not something like an h1 header), the default size is 16px, so the default size of an em is also 16px. Fractions of an em then represent fractions of the full font size; for example, if the font size is 16px, a unit of 0.5em would be 50% of 16, or 8px, and 2.25em would be 225% of 16, or 36px.
+	One important property of em units is that they are cumulative: if an element has font size set to 0.5em appears inside an element whose font size is also 0.5em, then the resulting font size for that bottom child element is 0.5×0.5=0.25em.
+	If you set a width for an object in em it will size the object based on the font size inside that element. For example, if the calculated font size in an element ends up being 16px, and you set the padding to 1.5em, then the padding will end up getting set to 1.5×16=24px.
+
+
+Root em:
+	Instead of being cumulatively sized based on the whole parent/child tree, the rem unit always refers back to the font size of the html tag—in other words, it always refers to the most basic font size (16px) for the whole page. If you want to make everything a little bigger, or smaller, you can change just this one font size and everything on the page adapts.
+	The best practice is to set a font size for the module’s wrapper using a rem unit, and then style the fonts inside using em units.
+	
+Viewport height and Viewport width:
+Each vh or vw is 1 percent of the corresponding browser dimension, so 3vh would equal 3% of the height of the browser and 100vw would be 100% of the width. Neither vh nor vw is affected by parent elements. 
+
+
+
+CHAPTER4 --- Box model
+
+4.1 Display style:
+"display: none" prevents the element from displaying on the page.
+"display: block" forces an element to be a block element regardless of what it was before. inline elements (such as links and spans) can’t have a width or height, but once you change the display property the dimensional styles get applied.
+"display: inline" turns a block element into an inline element. width and height, top margins, or padding will no longer be applied. The element will no longer be on its own line, but rather will flow with text like any other inline element.
+"display: inline-block" allows width and height, top margins, or padding. At the same time, text will still flow around it, and it will only take up as much horizontal space as it needs to contain the content
+"display: flex" is a powerful display property that forces all child elements to fill the entire parent element, and is highly customizable to allow for incredibly useful layout possibilities.
+
+4.2 Margins, padding, and border
+"box-sizing: border-box" caused the browser to draw the borders and padding inside of the defined width, so the total width including border and padding would be the value specified by you rather than just content width.
+When two block elements with margins follow each other, one of the top or bottom margins is canceled out. But if one is inline-element and one is block, two margins would add together.
+
+4.3 Floats
+When you set an element to float to the left or right (there is no float: center), all the inline content around it will flow around the floated element like water. Floated elements will always sit next to other floated elements on the same line, as long as there is horizontal room. If the elements are too wide, they will drop down to the next line.
+The CSS clear rule, which is used to let the browser know to end floats. e.g. <p style="clear: left;"> This will force the paragraph onto a new line below the floated elements, and it will prevent any other element below it on the page from being altered by the "float: left".
+Having to add a clear style directly onto any element (either inline or in the stylesheet) after floated elements is kind of a pain. A better way to clear floats is apply a rule to clear everything inside a wrapper. There are two methods to clear floats inside a wrapper: the overflow method, and the :after “clearfix” method.
+
+4.4 More on overflow style
+"overflow: hiddren" cut all extra part over the specified box height.
+"overflow: visible" extend extra part to the space blow the box.
+"overflow: scroll" makes a scroll for extra part.
+if you don't specify height, it will auto fit the content.
+
+4.5 Inline Block
+we can make list elements become inline elements so that they can stay together. 
+make the unordered list belong to class <ul class="social-list">
+.social-list > li {
+	display: inline-block;
+}
+
+4.6 Margin
+with setting "box-sizing: border-box;", box's total width = its specified width + 2*margin width (left and right margin). 
+"margin: td rl;" allow us to enter two values for top-down right-left margins.
+"margin: top right down;" allow us to enter three values for top, right-left, and down margins.
+"margin: auto" allow us to center the block element (like a div, p, or a ul) horizontally within its parent container. 
+"margin: -value1 ..." negative margin allow us to pull the element to the space it normally can't affect. For example, use it to overlap an image.
+
+4.7 Padding
+Works same as margin, but for content inside the box.
+
+4.8 Border
+"border: 1px solid black;" actually stand for following, the four sides of border are top-right-down-left
+border-width: 1px 1px 1px 1px;
+border-style: solid solid solid solid;
+border-color: black black black black;
+"border-radius: value" can be used  to create round cornor of the box. When setting border-radius bigger than the width of the element, while also making sure the height and width of the element are equal (so that the “box” is a perfect square), we create a circle.
+"line-height: value" applies for inline elements like text. It set space above and below text and other inline elements (行间距).
+
+5.2 Jekyll
+A program for generating static websites (that is, sites that don’t change from visit to visit). To use it, you should find a new folder in your project called _site (with a leading underscore), and don't change anything inside it at anytime because they will be automatically overwritten when you update any change to your website.
+
+5.4 Layout
+Create _layouts folder, html files inside are static layouts that can be rendered in other html sites. The idea is 在任意页面中调用静态layouts. This is done by Jekyll.
+
+5.5 CSS file and reset
+Creat folder called CSS and a file main.css inside it. Do all customized styling in main.css. And use link <link rel="stylesheet" href="/css/main.css"> to call it in html.
+In general, we reset some elementary styling since they differ browser to browser. We store them in reset.css file. Put reset link in front of every other style links.
+To understand, this has nothing to do with Jekyll, just an usual way to do CSS.
+
+5.6 Inclides intro: head and header
+The most important idea of layout is slicing up the default page into reusable pieces. This way, we can reuse every static layouts in every page we want. 
+Jekyll provides "includes" to help us with this important task. Includes are supposed to be the smallest/most reusable snippets of site code. They are usually loaded into either layouts or templates, but in fact can be used anywhere on a site—you can even have includes call other includes. Of course we need _includes folder to store those includes.
+For example, we can put head section into head.html inside _includes folder and use {% include head.html %} to call the include code.
+header.html can also be an include, it may contains navagation bar and logo.
+We can also load dynamic text into includes. By adding {{ include.content }} somewhere in an include, and call it in some layout like {% include include_name.html content="..." %}, {{ include.content }} will be auto replaced by content.
+
+5.7 Advanced selectors
+Link styles -
+We may want to make links different when users roll over, click, and after visiting it. pseudo-classes allow developers to style different interactions with the link. The way to add a pseudo-class to a style declaration is by combining the element or class name with the pseudo-class. For example, ".class_name a:pseudo-class" to apply certain pseudo-class to certain class's links.
+first-child & last-child pseudo-class -
+This pseudo-class allow us to target the first child element inside certain class, and make it different from the others. Similar thing happen to last-child.
+Siblings -
+the adjacent sibling + : selects a single element only if it is right next to the primary element in the declaration. For example, "h2 + p" selects a p tag only if it is immediately preceded by an h2 tag.
+the general sibling ~ : selects all elements of the type in the declaration if they follow the primary element. For example, "h2 ~ p" applies to all p tags preceded by an h2 tag.
+sibling selectors don’t pass styles to elements that are wrapped inside any other elements. They only work on elements inside the same parent.
+
+5.8 Positioning
+z-index -
+To determine priorities of showing overlapping elements.
+directional styles -
+"direction: value" to set the element away from the directional edge.
+position: static -
+An element that has no position style set, or has position: static, will ignore directional styles like left, right, top, and bottom.
+position: relative -
+Place absolutely positioned items at a location that relative to its related element (say, parent element). Using "position: relative;" in parent element and "position: absolute;" in children element.
+position: absolute -
+Place the element at a specific location in the browser window. If the location already contains other element, it will be covered or hidden.
+position: fixed -
+Positions the element at a specific place within the browser window totally separate from the page content. When you scroll the page, it won’t move.
+centering element -
+First using "left: 50%;" and "top: 50%;" to make the element's left-top corner center. Then, use "transform: translate(-50%, -50%);" to push the element to left and top of its own width and height. translate(x, y)—where x is the distance along the x-axis (left is negative, right is positive), and the same for the y-axis (up is negative, down positive).
+
+5.9 Fixed Header
+Use "position: fixed;" to make the element stick on the browser no matter how to scroll the window while give the element a large z-index to make sure that it has priority to show.
+box-shadow style -
+Add "box-shadow: x-axis y-axis blur size color inset" in html to add border to entire page. Don't forget to add padding, otherwise the border would eat the contents on 4 edges.
