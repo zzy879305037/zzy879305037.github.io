@@ -126,3 +126,9 @@ First using "left: 50%;" and "top: 50%;" to make the element's left-top corner c
 Use "position: fixed;" to make the element stick on the browser no matter how to scroll the window while give the element a large z-index to make sure that it has priority to show.
 box-shadow style -
 Add "box-shadow: x-axis y-axis blur size color inset" in html to add border to entire page. Don't forget to add padding, otherwise the border would eat the contents on 4 edges.
+
+5.10 Footer and includes in includes
+Footer -
+As how we create header, we create footer.html in _includes folder, and add elements inside it, manipulating it by using CSS in main.css file. 
+includes in includes -
+For example, we create nav-links.html in _includes folder. Put all navigation-links inside it and call the include in both header.html and footer.html. Don't forget to add ".nav-links" class to main.css file in order to style them in both header and footer.
